@@ -1,0 +1,12 @@
+{
+  "name": "website-saya",
+  "version": "1.0.0",
+  "description": "Website sederhana dengan Node.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "echo 'No build needed'"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
