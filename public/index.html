@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Saya</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .emoji-big {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #f97316, #ec4899, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn {
+            background: linear-gradient(to right, #f97316, #ec4899);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(to right, #8b5cf6, #06b6d4);
+        }
+
+        #api-result {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            display: none;
+            font-family: monospace;
+            color: #4ade80;
+            font-size: 1.1em;
+        }
+
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .tech-badge {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        footer {
+            margin-top: 40px;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="emoji-big">🚀</div>
+        <h1>Website Saya</h1>
+        <p>Dibuat dengan Node.js & Express, di-deploy ke Vercel,
+           langsung dari HP! 📱</p>
+
+        <div class="card">
+            <h2>✨ Selamat Datang!</h2>
+            <p>Website ini 100% dibuat dan di-deploy dari iPhone
+               menggunakan GitHub + Vercel. Tanpa laptop!</p>
+
+            <button class="btn" onclick="callAPI()">
+                🔗 Panggil API
+            </button>
+            <button class="btn btn-secondary" onclick="showTime()">
+                ⏰ Waktu Sekarang
+            </button>
+
+            <div id="api-result"></div>
+        </div>
+
+        <div class="tech-stack">
+            <span class="tech-badge">📦 Node.js</span>
+            <span class="tech-badge">⚡ Express</span>
+            <span class="tech-badge">▲ Vercel</span>
+            <span class="tech-badge">🐙 GitHub</span>
+        </div>
+
+        <footer>
+            <p>Made with ❤️ from iPhone</p>
+        </footer>
+    </div>
+
+    <script>
+        async function callAPI() {
+            const resultDiv = document.getElementById('api-result');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = '⏳ Memuat...';
+
+            try {
+                const response = await fetch('/api/hello');
+                const data = await response.json();
+                resultDiv.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultDiv.textContent = '❌ Error: ' + error.message;
+            }
+        }
+
+        function showTime() {
+            const resultDiv = document.getElementById('api-result');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = '🕐 ' + new Date().toLocaleString('id-ID', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+        }
+    </script>
+</body>
+</html>
